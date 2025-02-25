@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: ${JDBC_DATABASE_URL}
-    username: ${JDBC_DATABASE_USERNAME}
-    password: ${JDBC_DATABASE_PASSWORD}
+    url: jdbc:postgresql://localhost:5432/tripr
+    username: postgres
+    password: P4ssword!
     hikari:
       connection-timeout: 30000
       maximum-pool-size: 10
@@ -21,15 +21,17 @@ spring:
     change-log: classpath:domain/changelog-master.yml
     drop-first: false
   mail:
-    host: ${SMTP_HOST}
-    username: ${SMTP_USERNAME}
-    password: ${SMTP_PASSWORD}
-    port: 587
+    host: localhost
+    username:
+    password:
+    port: 1025
     properties.mail.smtp:
-      auth: true
+      auth: false
       starttls:
-        enable: true
-        required: true
+        enable: false
+        required: false
+      ssl:
+        enable: false
       connectiontimeout: 15000
       timeout: 45000
   docker:
@@ -58,8 +60,8 @@ management:
 springdoc:
   pathsToMatch: /authenticate, /passwordReset/**, /refresh, /register
 app:
-  baseHost: ${BASE_HOST}
+  baseHost: ${BASE_HOST:http://localhost:8080}
   mail:
     from: bob@invalid.bootify.io
 jwt:
-  secret: ${JWT_SECRET}
+  secret: D1A4798A74E1310E0B89079E66FC826E

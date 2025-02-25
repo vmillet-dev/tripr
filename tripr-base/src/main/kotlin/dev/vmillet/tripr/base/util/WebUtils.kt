@@ -9,6 +9,10 @@ import org.springframework.web.context.request.ServletRequestAttributes
 import org.springframework.web.servlet.LocaleResolver
 import org.thymeleaf.TemplateEngine
 import org.thymeleaf.context.Context
+import org.thymeleaf.templatemode.TemplateMode
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver
+
+
 
 
 @Component
@@ -50,10 +54,16 @@ class WebUtils(
 
         @JvmStatic
         fun renderTemplate(templateName: String, templateModel: Map<String, Any?>): String {
+
+            val templateResolver = ClassLoaderTemplateResolver()
+            templateResolver.suffix = ".html"
+            templateResolver.templateMode = TemplateMode.HTML
+            templateEngine.setTemplateResolver(templateResolver);
+
             val thymeleafContext = Context()
             thymeleafContext.setVariables(templateModel)
             thymeleafContext.setVariable("baseHost", baseHost)
-            return templateEngine.process(templateName, thymeleafContext)
+            return templateEngine.process("templates$templateName", thymeleafContext)
         }
 
     }

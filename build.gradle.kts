@@ -122,7 +122,7 @@ project(":tripr-web") {
     }
 
     tasks.getByName<BootRun>("bootRun") {
-        environment.put("SPRING_PROFILES_ACTIVE", environment.get("SPRING_PROFILES_ACTIVE") ?: "local")
+        environment["SPRING_PROFILES_ACTIVE"] = environment["SPRING_PROFILES_ACTIVE"] ?: "dev"
         workingDir = rootProject.projectDir
         enabled = true
     }
