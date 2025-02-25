@@ -6,11 +6,12 @@ import { InputRowComponent } from 'app/common/input-row/input-row.component';
 import { AuthenticationService } from 'app/security/authentication.service';
 import { AuthenticationRequest } from 'app/security/authentication.model';
 import { ErrorHandler } from 'app/common/error-handler.injectable';
+import {TranslocoPipe} from "@jsverse/transloco";
 
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, RouterLink, ReactiveFormsModule, InputRowComponent],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule, InputRowComponent, TranslocoPipe],
   templateUrl: './authentication.component.html'
 })
 export class AuthenticationComponent {

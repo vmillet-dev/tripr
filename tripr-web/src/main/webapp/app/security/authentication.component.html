@@ -1,15 +1,15 @@
-<h1 class="mb-4" i18n="@@authentication.login.headline">Login</h1>
+<h1 class="mb-4">{{ 'authentication-login-headline' | transloco }}</h1>
 <form [formGroup]="loginForm" (ngSubmit)="handleSubmit()">
-    <app-input-row [group]="loginForm" field="email" rowType="email" i18n-label="@@authentication.email.label" label="Email" />
-    <app-input-row [group]="loginForm" field="password" rowType="password" i18n-label="@@authentication.password.label" label="Password" />
-    <app-input-row [group]="loginForm" field="rememberMe" rowType="checkbox" i18n-label="@@authentication.rememberMe.label" label="Remember Me" />
-    <input type="submit" i18n-value="@@authentication.login.headline" value="Login" class="btn btn-primary mt-4" />
+    <app-input-row [group]="loginForm" field="email" rowType="email" label="{{ 'email' | transloco }}" />
+    <app-input-row [group]="loginForm" field="password" rowType="password" label="{{ 'password' | transloco }}" />
+    <app-input-row [group]="loginForm" field="rememberMe" rowType="checkbox" label="{{ 'remember-me' | transloco }}" />
+    <input type="submit" value="{{ 'login' | transloco }}" class="btn btn-primary mt-4" />
 </form>
 <p class="mt-5">
-    <span i18n="@@authentication.registerNow.text">You don't have an account yet?</span>
-    <a routerLink="/register" i18n="@@authentication.registerNow.link">Register now</a>
+    <span>{{ 'authentication-register-now-text' | transloco }}</span>
+    <a routerLink="/register">{{ 'authentication-register-now-link' | transloco }}</a>
 </p>
 <p>
-    <span i18n="@@authentication.resetPasswort.text">Forgot your password?</span>
-    <a routerLink="/passwordReset/start" i18n="@@authentication.resetPasswort.link">Reset</a>
+    <span>{{ 'authentication-reset-passwort-text' | transloco }}</span>
+    <a routerLink="/password{{ 'authentication-reset-passwort-link' | transloco }}/start">Reset</a>
 </p>

@@ -6,12 +6,13 @@ import { InputRowComponent } from 'app/common/input-row/input-row.component';
 import { PasswordResetService } from 'app/security/passwordReset.service';
 import { PasswordResetCompleteRequest } from 'app/security/passwordReset.model';
 import { ErrorHandler } from 'app/common/error-handler.injectable';
+import {TranslocoPipe} from "@jsverse/transloco";
 
 
 @Component({
   selector: 'app-passwordReset',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, InputRowComponent],
+  imports: [CommonModule, ReactiveFormsModule, InputRowComponent, TranslocoPipe],
   templateUrl: './passwordReset.complete.component.html'
 })
 export class PasswordResetCompleteComponent implements OnInit {

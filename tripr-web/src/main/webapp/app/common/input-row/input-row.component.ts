@@ -2,12 +2,13 @@ import { KeyValuePipe } from '@angular/common';
 import { Component, HostListener, inject, Input, OnChanges, OnInit } from '@angular/core';
 import { AbstractControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputErrorsComponent } from 'app/common/input-row/input-errors.component';
+import {TranslocoPipe} from "@jsverse/transloco";
 
 
 @Component({
   selector: 'app-input-row',
   templateUrl: './input-row.component.html',
-  imports: [ReactiveFormsModule, InputErrorsComponent, KeyValuePipe]
+  imports: [ReactiveFormsModule, InputErrorsComponent, KeyValuePipe, TranslocoPipe]
 })
 export class InputRowComponent implements OnChanges, OnInit {
 

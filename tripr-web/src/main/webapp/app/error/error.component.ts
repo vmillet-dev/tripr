@@ -2,11 +2,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { getReasonPhrase } from 'http-status-codes';
+import {TranslocoPipe} from "@jsverse/transloco";
 
 
 @Component({
   selector: 'app-error',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslocoPipe],
   templateUrl: './error.component.html'
 })
 export class ErrorComponent implements OnInit {

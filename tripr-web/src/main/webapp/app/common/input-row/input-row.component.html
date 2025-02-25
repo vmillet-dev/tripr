@@ -1,5 +1,6 @@
 <div [formGroup]="group!" class="row mb-3">
     @if (rowType === 'checkbox') {
+
     <div class="col-md-10 offset-md-2">
         <div class="form-check">
             <input [id]="field" [formControlName]="field" type="checkbox"
@@ -10,7 +11,9 @@
         </div>
         <app-input-errors [control]="control" />
     </div>
+
     } @else {
+
     <label [for]="rowType === 'radio' ? '' : field" class="col-md-2 col-form-label">
         {{ label + (isRequired() ? '*' : '') }}
     </label>
@@ -27,7 +30,7 @@
         } @else if (rowType === 'select') {
         <select [id]="field" [formControlName]="field"
                 class="form-select {{ getInputClasses() }}">
-            <option [ngValue]="null" i18n="@@select.empty.label">Please select</option>
+            <option [ngValue]="null">{{ 'select-empty-label' | transloco }}</option>
             @for (option of optionsMap | keyvalue; track option.key) {
             <option [ngValue]="option.key">{{ option.value }}</option>
             }
@@ -44,7 +47,7 @@
             <div class="form-check form-check-inline pt-2">
                 <input [id]="field" [formControlName]="field" [value]="null" type="radio"
                        class="form-check-input {{ inputClass }}" />
-                <label [for]="field" class="form-check-label" i18n="@@select.empty.label">Please select</label>
+                <label [for]="field" class="form-check-label">{{ 'select-empty-label' | transloco }}</label>
             </div>
             }
             @for (option of optionsMap | keyvalue; track option.key) {
@@ -57,5 +60,6 @@
         }
         <app-input-errors [control]="control" />
     </div>
+
     }
 </div>

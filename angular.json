@@ -31,11 +31,8 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "tripr-web/src/main/webapp/favicon.ico",
-              {"glob": "**/*", "input": "tripr-base/src/main/webapp/public"},
-              {"glob": "**/*", "input": "tripr-security/src/main/webapp/public"},
-              {"glob": "**/*", "input": "tripr-scraping/src/main/webapp/public"},
-              {"glob": "**/*", "input": "tripr-core/src/main/webapp/public"},
-              {"glob": "**/*", "input": "tripr-web/src/main/webapp/public"}
+              {"glob": "**/*", "input": "tripr-web/src/main/webapp/public"},
+              {"glob": "**/*", "input": "tripr-web/src/main/webapp/assets", "output": "assets"}
             ],
             "styles": [
               "tripr-web/src/main/webapp/styles.scss"

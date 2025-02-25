@@ -1,11 +1,12 @@
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { APP_INITIALIZER, ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule, ExtraOptions, TitleStrategy } from '@angular/router';
+import { HttpClientModule, HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
+import { APP_INITIALIZER, ApplicationConfig, importProvidersFrom, provideZoneChangeDetection, isDevMode } from '@angular/core';
+import { ExtraOptions, TitleStrategy, provideRouter, withRouterConfig} from '@angular/router';
 import { AuthenticationInterceptor } from 'app/security/authentication.injectable';
 import { AuthenticationService } from 'app/security/authentication.service';
 import { routes } from 'app/app.routes';
 import { CustomTitleStrategy } from 'app/common/title-strategy.injectable';
+import { TranslocoHttpLoader } from './transloco-loader';
+import { provideTransloco } from '@jsverse/transloco';
 
 
 const routeConfig: ExtraOptions = {
@@ -15,7 +16,6 @@ const routeConfig: ExtraOptions = {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    importProvidersFrom(RouterModule.forRoot(routes, routeConfig), BrowserAnimationsModule, HttpClientModule),
     provideZoneChangeDetection({ eventCoalescing: true }),
     {
       provide: TitleStrategy,
@@ -33,6 +33,18 @@ export const appConfig: ApplicationConfig = {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthenticationInterceptor,
       multi: true
-    }
+    },
+    provideRouter(routes),
+    provideHttpClient(),
+    provideTransloco({
+        config: {
+          availableLangs: ['en'],
+          defaultLang: 'en',
+          // Remove this option if your application doesn't support changing language in runtime.
+          reRenderOnLangChange: true,
+          prodMode: !isDevMode(),
+        },
+        loader: TranslocoHttpLoader
+      })
   ]
 };

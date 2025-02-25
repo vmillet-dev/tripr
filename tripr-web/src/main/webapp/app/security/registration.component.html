@@ -1,6 +1,6 @@
-<h1 class="mb-4" i18n="@@registration.register.headline">Registration</h1>
+<h1 class="mb-4">{{ 'registration-register-headline' | transloco }}</h1>
 <form [formGroup]="registrationForm" (ngSubmit)="handleSubmit()">
-    <app-input-row [group]="registrationForm" field="email" rowType="email" i18n-label="@@registrationRequest.email.label" label="Email" />
-    <app-input-row [group]="registrationForm" field="password" rowType="password" i18n-label="@@registrationRequest.password.label" label="Password" />
-    <input type="submit" i18n-value="@@registration.register.headline" value="Registration" class="btn btn-primary mt-4" />
+    <app-input-row [group]="registrationForm" field="email" rowType="email" label="{{ 'email' | transloco }}" />
+    <app-input-row [group]="registrationForm" field="password" rowType="password" label="{{ 'password' | transloco }}" />
+    <input type="submit" value="{{ 'registration' | transloco }}" class="btn btn-primary mt-4" />
 </form>
