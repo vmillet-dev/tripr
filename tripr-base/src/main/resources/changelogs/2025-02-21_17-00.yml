@@ -1,0 +1,96 @@
+databaseChangeLog:
+  - changeSet:
+      id: tripr-initial
+      author: bootify.io
+      changes:
+        - createSequence:
+            cycle: false
+            incrementBy: 1
+            sequenceName: primary_sequence
+            startValue: 10000
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: email
+                  type: character varying(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: character varying(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password_reset_uid
+                  type: uuid
+              - column:
+                  name: password_reset_start
+                  type: timestamp
+              - column:
+                  name: role_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: refresh_token
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: token
+                  type: uuid
+              - column:
+                  name: expire_at
+                  type: timestamp
+              - column:
+                  name: user_id
+                  type: bigint
+        - createTable:
+            tableName: role
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: character varying(255)
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            constraintName: fk_user_role_id
+            baseTableName: user
+            baseColumnNames: role_id
+            referencedTableName: role
+            referencedColumnNames: id
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+        - addUniqueConstraint:
+            constraintName: unique_user_email
+            tableName: user
+            columnNames: email
+        - addForeignKeyConstraint:
+            constraintName: fk_refresh_token_user_id
+            baseTableName: refresh_token
+            baseColumnNames: user_id
+            referencedTableName: user
+            referencedColumnNames: id
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+        - addUniqueConstraint:
+            constraintName: unique_role_name
+            tableName: role
+            columnNames: name
