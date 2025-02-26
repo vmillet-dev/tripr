@@ -8,7 +8,7 @@ application-local.yml
 *.log
 .DS_Store
 node_modules/
-.angular/cache
+.angular/
 
 ## IntelliJ IDEA
 .idea
