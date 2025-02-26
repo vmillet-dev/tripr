@@ -1,12 +1,12 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { AuthenticationComponent } from './security/authentication.component';
-import { PasswordResetStartComponent } from './security/passwordReset.start.component';
-import { PasswordResetCompleteComponent } from './security/passwordReset.complete.component';
-import { RegistrationComponent } from './security/registration.component';
-import { ErrorComponent } from './error/error.component';
-import {AuthenticationService} from "./security/authentication.service";
+import { LoginComponent } from './auth/login/login.component';
+import { PasswordResetStartComponent } from './auth/pwd-reset-start/password-reset.start.component';
+import { PasswordResetCompleteComponent } from './auth/pwd-reset-complete/password-reset.complete.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { ErrorComponent } from './common/error/error.component';
+import {AuthService} from "./shared/services/auth.service";
 
 
 export const routes: Routes = [
@@ -17,7 +17,7 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    component: AuthenticationComponent,
+    component: LoginComponent,
     title: $localize`:@@authentication.login.headline:Login`
   },
   {
@@ -32,7 +32,7 @@ export const routes: Routes = [
   },
   {
     path: 'register',
-    component: RegistrationComponent,
+    component: RegisterComponent,
     title: $localize`:@@registration.register.headline:Registration`
   },
   {
@@ -49,5 +49,5 @@ export const routes: Routes = [
 
 // add authentication check to all routes
 for (const route of routes) {
-  route.canActivate = [(route: ActivatedRouteSnapshot) => inject(AuthenticationService).checkAccessAllowed(route)];
+  route.canActivate = [(route: ActivatedRouteSnapshot) => inject(AuthService).checkAccessAllowed(route)];
 }

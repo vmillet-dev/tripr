@@ -15,8 +15,8 @@
                         <a routerLink="/" class="nav-link">{{ 'navigation-home' | transloco }}</a>
                     </li>
                     <li class="navbar-item">
-                        @if (authenticationService.isLoggedIn()) {
-                        <button type="button" (click)="authenticationService.logout()" class="nav-link">{{ 'navigation-logout' | transloco }}</button>
+                        @if (authService.isLoggedIn()) {
+                        <button type="button" (click)="authService.logout()" class="nav-link">{{ 'navigation-logout' | transloco }}</button>
                         } @else {
                         <a routerLink="/login" class="nav-link">{{ 'navigation-login' | transloco }}</a>
                         }

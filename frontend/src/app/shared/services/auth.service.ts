@@ -1,9 +1,9 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
-import { tap } from 'rxjs';
-import { AuthenticationRequest, AuthenticationResponse, RegistrationRequest } from './authentication.model';
-import {environment} from "../../environments/environment";
+import {BehaviorSubject, Observable, tap } from 'rxjs';
+import { AuthenticationRequest, AuthenticationResponse, RegistrationRequest } from '../../auth/auth.model';
+import { LocalStorageService } from "./local-storage.service";
+import { ApiService } from "./api.service";
 
 
 export const ADMIN = 'ADMIN';
@@ -12,21 +12,29 @@ export const MEMBER = 'MEMBER';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthenticationService {
+export class AuthService {
 
-  http = inject(HttpClient);
-  router = inject(Router);
-  loginPath = environment.apiPath + '/authenticate';
-  refreshPath = environment.apiPath + '/refresh';
-  registerPath = environment.apiPath + '/register';
+  private router: Router = inject(Router);
+  private apiService: ApiService = inject(ApiService);
+  private localStorageService: LocalStorageService = inject(LocalStorageService);
 
   loginSuccessUrl: string = '/';
   updateIntervalSeconds: number = 15;
 
-  init() {
-    // check refresh token on application start and every x seconds
+  private currentUserSubject: BehaviorSubject<AuthenticationResponse | null>;
+  public currentUser$: Observable<AuthenticationResponse | null>;
+
+  constructor() {
+    this.currentUserSubject = new BehaviorSubject<AuthenticationResponse | null>(this.getUserFromStorage());
+    this.currentUser$ = this.currentUserSubject.asObservable();
+
     this.updateRefreshToken();
     setInterval(() => this.updateRefreshToken(), this.updateIntervalSeconds * 1000);
+  }
+
+  private getUserFromStorage(): AuthenticationResponse | null {
+    const storedUser = this.localStorageService.getData('currentUser');
+    return storedUser ? JSON.parse(storedUser) : null;
   }
 
   getMessage(key: string, details?: any) {
@@ -70,13 +78,13 @@ export class AuthenticationService {
   }
 
   login(authenticationRequest: AuthenticationRequest) {
-    return this.http.post<AuthenticationResponse>(this.loginPath, authenticationRequest)
+    return this.apiService.post<AuthenticationResponse>('/authenticate', authenticationRequest)
         .pipe(tap((data) => this.setSession(data)));
   }
 
   setSession(authenticationResponse: AuthenticationResponse) {
-    localStorage.setItem('access_token', authenticationResponse.accessToken!);
-    localStorage.setItem('refresh_token', authenticationResponse.refreshToken!);
+    this.localStorageService.saveData('access_token', authenticationResponse.accessToken!);
+    this.localStorageService.saveData('refresh_token', authenticationResponse.refreshToken!);
   }
 
   isLoggedIn() {
@@ -89,7 +97,7 @@ export class AuthenticationService {
   }
 
   updateRefreshToken() {
-    const refreshToken = localStorage.getItem('refresh_token');
+    const refreshToken = this.localStorageService.getData('refresh_token');
     if (!refreshToken) {
       return;
     }
@@ -97,14 +105,14 @@ export class AuthenticationService {
       // token not expired yet
       return;
     }
-    this.http.post<AuthenticationResponse>(this.refreshPath, { refreshToken })
+    this.apiService.post<AuthenticationResponse>('/refresh', { refreshToken })
         .subscribe({
           next: (data) => this.setSession(data),
           error: (error) => {
             if (error.status === 401) {
               // next action will trigger the login screen
-              localStorage.removeItem('access_token');
-              localStorage.removeItem('refresh_token');
+              this.localStorageService.removeData('access_token');
+              this.localStorageService.removeData('refresh_token');
             }
           }
         });
@@ -116,7 +124,7 @@ export class AuthenticationService {
   }
 
   getToken() {
-    return localStorage.getItem('access_token');
+    return this.localStorageService.getData('access_token');
   }
 
   getTokenData() {
@@ -132,17 +140,13 @@ export class AuthenticationService {
     if (this.isLoggedIn()) {
       this.loginSuccessUrl = '/';
     }
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
-    this.router.navigate(['/login'], {
-          state: {
-            msgInfo: this.getMessage('logoutSuccess')
-          }
-        });
+    this.localStorageService.removeData('access_token');
+    this.localStorageService.removeData('refresh_token');
+    this.router.navigate(['/login'], { state: { msgInfo: this.getMessage('logoutSuccess') } }).then();
   }
 
   register(registrationRequest: RegistrationRequest) {
-    return this.http.post(this.registerPath, registrationRequest);
+    return this.apiService.post<void>('/register', registrationRequest);
   }
 
 }

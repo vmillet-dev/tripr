@@ -12,7 +12,7 @@ import {TranslocoPipe} from "@jsverse/transloco";
 })
 export class ErrorComponent implements OnInit {
 
-  router = inject(Router);
+  private router = inject(Router);
 
   status = '404';
   error = getReasonPhrase(this.status);

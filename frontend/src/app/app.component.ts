@@ -12,7 +12,7 @@ import {HeaderComponent} from "./common/header/header.component";
 })
 export class AppComponent implements OnInit {
 
-  router = inject(Router);
+  private router = inject(Router);
 
   msgSuccess = null;
   msgInfo = null;

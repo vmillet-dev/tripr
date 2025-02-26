@@ -2,10 +2,10 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
-import { InputRowComponent } from '../common/input-row/input-row.component';
-import { PasswordResetService } from './passwordReset.service';
-import { PasswordResetCompleteRequest } from './passwordReset.model';
-import { ErrorHandler } from '../common/error-handler.injectable';
+import { InputRowComponent } from '../../common/input-row/input-row.component';
+import { PasswordResetService } from '../../shared/services/password-reset.service';
+import { PasswordResetCompleteRequest } from '../password-reset.model';
+import { ErrorHandler } from '../../common/error-handler.injectable';
 import {TranslocoPipe} from "@jsverse/transloco";
 
 
@@ -13,7 +13,7 @@ import {TranslocoPipe} from "@jsverse/transloco";
   selector: 'app-passwordReset',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, InputRowComponent, TranslocoPipe],
-  templateUrl: './passwordReset.complete.component.html'
+  templateUrl: './password-reset.complete.component.html'
 })
 export class PasswordResetCompleteComponent implements OnInit {
 

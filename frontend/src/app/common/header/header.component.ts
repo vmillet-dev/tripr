@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import {TranslocoPipe} from "@jsverse/transloco";
-import {AuthenticationService} from "../../security/authentication.service";
+import {AuthService} from "../../shared/services/auth.service";
 
 
 @Component({
@@ -12,6 +12,6 @@ import {AuthenticationService} from "../../security/authentication.service";
 })
 export class HeaderComponent {
 
-  authenticationService = inject(AuthenticationService);
+  authService = inject(AuthService);
 
 }

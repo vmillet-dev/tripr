@@ -2,21 +2,21 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
-import { InputRowComponent } from '../common/input-row/input-row.component';
-import { AuthenticationService } from './authentication.service';
-import { RegistrationRequest } from './authentication.model';
-import { ErrorHandler } from '../common/error-handler.injectable';
+import { InputRowComponent } from '../../common/input-row/input-row.component';
+import { AuthService } from '../../shared/services/auth.service';
+import { RegistrationRequest } from '../auth.model';
+import { ErrorHandler } from '../../common/error-handler.injectable';
 import {TranslocoPipe} from "@jsverse/transloco";
 
 
 @Component({
   selector: 'app-registration',
   imports: [CommonModule, ReactiveFormsModule, InputRowComponent, TranslocoPipe],
-  templateUrl: './registration.component.html'
+  templateUrl: './register.component.html'
 })
-export class RegistrationComponent {
+export class RegisterComponent {
 
-  authenticationService = inject(AuthenticationService);
+  authenticationService = inject(AuthService);
   router = inject(Router);
   errorHandler = inject(ErrorHandler);
 

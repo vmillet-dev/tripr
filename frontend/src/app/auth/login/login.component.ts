@@ -2,21 +2,21 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
-import { InputRowComponent } from '../common/input-row/input-row.component';
-import { AuthenticationService } from './authentication.service';
-import { AuthenticationRequest } from './authentication.model';
-import { ErrorHandler } from '../common/error-handler.injectable';
+import { InputRowComponent } from '../../common/input-row/input-row.component';
+import { AuthService } from '../../shared/services/auth.service';
+import { AuthenticationRequest } from '../auth.model';
+import { ErrorHandler } from '../../common/error-handler.injectable';
 import {TranslocoPipe} from "@jsverse/transloco";
 
 
 @Component({
   selector: 'app-login',
   imports: [CommonModule, RouterLink, ReactiveFormsModule, InputRowComponent, TranslocoPipe],
-  templateUrl: './authentication.component.html'
+  templateUrl: './login.component.html'
 })
-export class AuthenticationComponent {
+export class LoginComponent {
 
-  authenticationService = inject(AuthenticationService);
+  authenticationService = inject(AuthService);
   router = inject(Router);
   errorHandler = inject(ErrorHandler);
 
