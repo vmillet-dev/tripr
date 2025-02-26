@@ -56,12 +56,10 @@ management:
     health:
       show-details: always
 springdoc:
-  pathsToMatch: /api/authenticate, /api/passwordReset/**, /api/refresh, /api/register
   swagger-ui:
-    disable-swagger-default-url: true
-    path: /api/swagger-ui
+    enabled: false
   api-docs:
-    path: /api/v3/api-docs
+    enabled: false
 app:
   baseHost: ${BASE_HOST}
   mail:
