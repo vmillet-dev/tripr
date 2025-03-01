@@ -1,1 +1,3 @@
-include("tripr-base", "tripr-security", "tripr-scraping", "tripr-core")
+rootProject.name = "Tripr"
+
+include("tripr-base", "tripr-core", "tripr-persistence", "tripr-security", "tripr-scraping")

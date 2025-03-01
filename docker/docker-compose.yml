@@ -1,0 +1,34 @@
+services:
+  postgres:
+    image: postgres:17.3
+    environment:
+      - POSTGRES_DB=tripr
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=P4ssword!
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+
+  mailpit:
+    image: axllent/mailpit
+    ports:
+      - "1025:1025"  # SMTP server port
+      - "8025:8025"  # Web UI port
+    restart: unless-stopped
+
+  app:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/tripr
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: P4ssword!
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:

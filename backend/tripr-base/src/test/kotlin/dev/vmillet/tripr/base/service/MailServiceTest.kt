@@ -1,6 +1,7 @@
 package dev.vmillet.tripr.base.service
 
 import dev.vmillet.tripr.base.config.BaseIT
+import dev.vmillet.tripr.core.service.MailService
 import io.restassured.RestAssured
 import io.restassured.http.ContentType
 import org.hamcrest.Matchers

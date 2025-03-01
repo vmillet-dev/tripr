@@ -1,5 +1,6 @@
 package dev.vmillet.tripr.base.util
 
+import dev.vmillet.tripr.core.util.WebUtils
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -14,11 +15,11 @@ class WebUtilsTest {
                 "test#test@domain.com", "test--test@domain.com")
         for (validEmail in validEmails) {
             Assertions.assertTrue(validEmail.matches(WebUtils.EMAIL_PATTERN.toRegex()),
-                    "email is not valid: ${validEmail}")
+                    "email is not valid: $validEmail")
         }
         for (invalidEmail in invalidEmails) {
             Assertions.assertFalse(invalidEmail.matches(WebUtils.EMAIL_PATTERN.toRegex()),
-                    "email is not invalid: ${invalidEmail}")
+                    "email is not invalid: $invalidEmail")
         }
     }
 

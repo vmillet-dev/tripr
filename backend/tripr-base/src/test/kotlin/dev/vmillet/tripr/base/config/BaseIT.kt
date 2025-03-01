@@ -1,9 +1,9 @@
 package dev.vmillet.tripr.base.config
 
 import dev.vmillet.tripr.base.TriprApplication
-import dev.vmillet.tripr.base.repos.RefreshTokenRepository
-import dev.vmillet.tripr.base.repos.RoleRepository
-import dev.vmillet.tripr.base.repos.UserRepository
+import dev.vmillet.tripr.persistence.repository.RefreshTokenRepository
+import dev.vmillet.tripr.persistence.repository.RoleRepository
+import dev.vmillet.tripr.persistence.repository.UserRepository
 import io.restassured.RestAssured
 import io.restassured.http.ContentType
 import jakarta.annotation.PostConstruct
@@ -89,7 +89,7 @@ abstract class BaseIT {
             }
             Thread.sleep(250)
         }
-        throw RuntimeException("Could not find ${total} messages in time.")
+        throw RuntimeException("Could not find $total messages in time.")
     }
 
     fun adminJwtToken(): String {
