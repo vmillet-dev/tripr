@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": "http://localhost:8080",
+    "target": "es5",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "types": ["cypress", "@types/node"]
+  },
+  "include": ["cypress/e2e/**/*.ts", "**/*.ts"]
+}
