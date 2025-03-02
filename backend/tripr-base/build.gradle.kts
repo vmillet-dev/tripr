@@ -1,4 +1,5 @@
 import org.springframework.boot.gradle.dsl.SpringBootExtension
+import org.springframework.boot.gradle.tasks.run.BootRun
 
 plugins {
     id("org.springframework.boot")
@@ -31,6 +32,12 @@ dependencies {
 
 configure<SpringBootExtension> {
     mainClass.set("dev.vmillet.tripr.base.TriprApplicationKt")
+}
+
+tasks.bootRun {
+    enabled = true
+    environment["SPRING_PROFILES_ACTIVE"] = environment["SPRING_PROFILES_ACTIVE"] ?: "dev"
+    workingDir = project.rootDir.resolve("./../")
 }
 
 tasks.bootJar {

@@ -1,6 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
 import org.springframework.boot.gradle.tasks.bundling.BootJar
+import org.springframework.boot.gradle.tasks.run.BootRun
 
 plugins {
     id("org.springframework.boot") version "3.4.3" apply false
@@ -55,6 +56,10 @@ subprojects {
 
     tasks.withType<Test> {
         useJUnitPlatform()
+    }
+
+    tasks.withType<BootRun> {
+        enabled = false
     }
 
     tasks.withType<BootJar> {
