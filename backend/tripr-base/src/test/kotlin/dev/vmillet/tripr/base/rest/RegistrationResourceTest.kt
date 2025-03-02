@@ -4,6 +4,7 @@ import dev.vmillet.tripr.base.config.BaseIT
 import io.restassured.RestAssured
 import io.restassured.http.ContentType
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.http.HttpStatus
 
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus
 class RegistrationResourceTest : BaseIT() {
 
     @Test
+    @DisplayName("Registration test")
     fun register_success() {
         RestAssured
                 .given()

@@ -2,12 +2,14 @@ package dev.vmillet.tripr.base.util
 
 import dev.vmillet.tripr.core.util.WebUtils
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 
 class WebUtilsTest {
 
     @Test
+    @DisplayName("emailValidation")
     fun emailValidation() {
         val validEmails = listOf("test@domain.com", "valid-email+1@invalid.bootify.io",
                 "A1_2@TEST-1-2.TECHNOLOGY")
