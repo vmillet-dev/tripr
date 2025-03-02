@@ -78,7 +78,7 @@ export class AuthService {
   }
 
   login(authenticationRequest: AuthenticationRequest) {
-    return this.apiService.post<AuthenticationResponse>('/authenticate', authenticationRequest)
+    return this.apiService.post<AuthenticationResponse>('authenticate', authenticationRequest)
         .pipe(tap((data) => this.setSession(data)));
   }
 
@@ -105,7 +105,7 @@ export class AuthService {
       // token not expired yet
       return;
     }
-    this.apiService.post<AuthenticationResponse>('/refresh', { refreshToken })
+    this.apiService.post<AuthenticationResponse>('refresh', { refreshToken })
         .subscribe({
           next: (data) => this.setSession(data),
           error: (error) => {
@@ -146,7 +146,7 @@ export class AuthService {
   }
 
   register(registrationRequest: RegistrationRequest) {
-    return this.apiService.post<void>('/register', registrationRequest);
+    return this.apiService.post<void>('register', registrationRequest);
   }
 
 }

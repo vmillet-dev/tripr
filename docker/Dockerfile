@@ -4,13 +4,13 @@ WORKDIR /app
 COPY ./frontend/package*.json ./
 RUN npm install
 COPY ./frontend .
-RUN npm run build:production
+RUN npm run build
 
 # Step 2: Build Spring Boot backend with Angular files included
 FROM gradle:8-jdk21 AS backend-build
 WORKDIR /app
 COPY ./backend/ .
-COPY --from=frontend-build /app/dist/ src/main/resources/static/
+COPY --from=frontend-build /app/dist/ tripr-base/src/main/resources/static/
 RUN gradle bootJar
 
 # Step 3: Create the final image with the fat JAR

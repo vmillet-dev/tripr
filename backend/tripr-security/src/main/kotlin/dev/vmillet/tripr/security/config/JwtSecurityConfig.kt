@@ -40,7 +40,16 @@ open class JwtSecurityConfig {
     ): SecurityFilterChain = http.securityMatcher("/dummy/jwt")
             .cors(Customizer.withDefaults())
             .csrf { csrf -> csrf.disable() }
-            .authorizeHttpRequests { authorize -> authorize.anyRequest().hasAuthority(UserRoles.ADMIN) }
+            .authorizeHttpRequests { authorize ->
+                authorize.requestMatchers("/api/auth/**",
+                "/",
+                "/static/**",
+                "/resources/**",
+                "/*.js",
+                "/*.css",
+                "/*.html",
+                "/*.ico",
+                "/assets/**").permitAll().anyRequest().hasAuthority(UserRoles.ADMIN) }
             .authenticationManager(jwtAuthenticationManager)
             .sessionManagement { session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter::class.java)

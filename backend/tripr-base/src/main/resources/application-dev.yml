@@ -37,6 +37,7 @@ spring:
   docker:
     compose:
       lifecycle-management: start-only
+      file: docker/docker-compose.yml
 error:
   handling:
     http-status-in-json-response: true
