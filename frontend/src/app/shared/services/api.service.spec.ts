@@ -19,7 +19,7 @@ describe('ApiService', () => {
     service.get(endpoint);
 
     // THEN
-    verify(httpClient.get('/api/test')).once();
+    verify(httpClient.get('/api/test', undefined)).once();
   });
 
   it('should call http.post with correct URL and data', () => {
