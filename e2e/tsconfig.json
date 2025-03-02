@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "http://localhost:8080",
+    "baseUrl": "http://host.docker.internal:8080",
     "target": "es5",
     "module": "commonjs",
     "esModuleInterop": true,
