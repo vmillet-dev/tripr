@@ -14,7 +14,7 @@ class MailServiceTest : BaseIT() {
     @Autowired
     private lateinit var mailService: MailService
 
-//    @Test
+    @Test
     fun sendMail_success() {
         mailService.sendMail("bob@invalid.bootify.io", "my subject", "my body")
         waitForMessages(1)

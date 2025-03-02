@@ -78,7 +78,7 @@ abstract class BaseIT {
 
     fun waitForMessages(total: Int) {
         var loop = 0
-        while (loop++ < 25) {
+        while (loop++ < 250) {
             val messagesResponse = RestAssured
                     .given()
                         .accept(ContentType.JSON)
