@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus
 
 class RegistrationResourceTest : BaseIT() {
 
-//    @Test
+    @Test
     fun register_success() {
         RestAssured
                 .given()
@@ -18,7 +18,7 @@ class RegistrationResourceTest : BaseIT() {
                     .contentType(ContentType.JSON)
                     .body(readResource("/requests/registrationRequest.json"))
                 .`when`()
-                    .post("/register")
+                    .post("/api/register")
                 .then()
                     .statusCode(HttpStatus.OK.value())
             Assertions.assertEquals(3, userRepository.count())
