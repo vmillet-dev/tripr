@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from "@angular/router/testing";
 import { HomeComponent } from './home.component';
+import {getTranslocoModule} from "../shared/testing/transloco-testing.module";
+import {provideRouter, RouterModule} from "@angular/router";
 
 
 describe('HomeComponent', () => {
@@ -9,7 +10,8 @@ describe('HomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, HomeComponent]
+      providers: [provideRouter([])],
+      imports: [RouterModule.forRoot([]), HomeComponent, getTranslocoModule()],
     })
     .compileComponents();
 

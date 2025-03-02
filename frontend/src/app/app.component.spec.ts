@@ -1,13 +1,20 @@
 import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from "@angular/router/testing";
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import {provideHttpClientTesting} from '@angular/common/http/testing';
 import { AppComponent } from './app.component';
+import {provideRouter} from "@angular/router";
+import {getTranslocoModule} from "./shared/testing/transloco-testing.module";
+import {provideHttpClient} from "@angular/common/http";
 
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule, AppComponent],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        provideRouter([])
+      ],
+      imports: [getTranslocoModule(), AppComponent],
     }).compileComponents();
   });
 
